@@ -19,6 +19,7 @@
     "axios": "^1.2.1",
     "cors": "^2.8.5",
     "css-loader": "^6.7.3",
+    "dotenv": "^16.0.3",
     "express-session": "^1.17.3",
     "file-loader": "^6.2.0",
     "nodemon": "^2.0.20",

@@ -1,7 +1,8 @@
 const path = require('path');
 const { Pool } = require('pg');
-const { DB_PASSWORD } = require(path.resolve(__dirname, '../../secrets.js'));
-
+// const { DB_PASSWORD } = require(path.resolve(__dirname, '../../secrets.js'));
+require('dotenv').config();
+const DB_PASSWORD = process.env.DB_PASSWORD;
 const PG_URI = `postgres://tekdpxxk:${DB_PASSWORD}@mahmud.db.elephantsql.com/tekdpxxk`;
 
 // This pools multiple db accesses into one request

@@ -7,7 +7,8 @@ const cors = require('cors');
 
 const session = require('express-session'); // required for oauth session
 
-const { SESSION_SECRET } = require('../../secrets.js');
+require('dotenv').config();
+SESSION_SECRET = process.env.SESSION_SECRET;
 const app = express();
 const PORT = 8080;
 
