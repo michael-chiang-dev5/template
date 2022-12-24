@@ -8,7 +8,7 @@ obj.getCards = async () => {
   return data.rows;
 };
 
-obj.addUser = async (args) => {
+obj.createUser = async (args) => {
   try {
     const arr = [
       args['sub'],
@@ -16,23 +16,23 @@ obj.addUser = async (args) => {
       args['email'],
       args['email_verified'],
     ];
-    const sql = `INSERT INTO GoogleUserInfo
+    const sql = `INSERT INTO Users
     (sub, picture, email, email_verified)
     VALUES ($1, $2, $3, $4)
-    RETURNING _id;`;
+    RETURNING *;`;
     const data = await pool.query(sql, arr);
     console.log(data.rows);
     return data.rows[0]._id;
   } catch (err) {
-    console.log('addUser', err);
+    console.log('createUser', err);
   }
 };
 
 obj.getUser = async (sub) => {
   try {
     const sql = `SELECT * 
-    FROM GoogleUserInfo
-    WHERE GoogleUserInfo.sub=$1`;
+    FROM Users
+    WHERE Users.sub=$1`;
     const data = await pool.query(sql, [sub]);
     if (data.rows.length === 0) {
       return null;

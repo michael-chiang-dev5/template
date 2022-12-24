@@ -3,7 +3,7 @@ import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import styles from './navbar.module.css';
 import { useSelector, useDispatch } from 'react-redux';
-import { setEmail } from '../../Redux/slices/userSlice';
+import { actionSetField } from '../../Redux/slices/userSlice';
 import { v4 as uuid } from 'uuid';
 
 const Navbar = ({ leftItems }) => {
@@ -23,7 +23,17 @@ const Navbar = ({ leftItems }) => {
       url: 'http://localhost:8080/auth/user',
     }).then((res) => {
       if (res.data) {
-        dispatch(setEmail(res.data.email));
+        if (res.data) {
+          console.log(res.data);
+          // Output of console.log(res.data);
+          //    { "_id": 1,
+          //      "sub": "117477940901052965444",
+          //      "picture": "https://lh3.googleusercontent.com/a/default-user=s96-c",
+          //      "email": "michael.chiang.mc5@gmail.com",
+          //      "email_verified": true}
+          dispatch(actionSetField({ field: 'email', value: res.data.email }));
+          dispatch(actionSetField({ field: '_id', value: res.data._id }));
+        }
       }
     });
   }, []);

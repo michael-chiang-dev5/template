@@ -22,7 +22,7 @@ const cb = async (request, accessToken, refreshToken, profile, done) => {
     // user not found so add user to db
     // profile._json contains the following fields:
     //   sub, picture, email, email_verified
-    const _id = await db.addUser(profile._json);
+    const _id = await db.createUser(profile._json);
     return done(null, { ...profile._json, _id });
   }
 };
@@ -48,3 +48,5 @@ passport.serializeUser(function (user, done) {
 passport.deserializeUser(function (user, done) {
   done(null, user);
 });
+
+module.exports = { passport };

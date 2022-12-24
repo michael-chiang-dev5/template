@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 require('./auth.js');
-const passport = require('passport');
+const { passport } = require('./auth.js');
 
 router.get('/user', (req, res) => {
   // req.user is the parsed jwt containing user information
