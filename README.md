@@ -1,6 +1,6 @@
 # Description
 
-This is a template project. It implements a minimal React frontend, express backend, postgresql database interface, and OAuth authentication.
+This is a template project. It implements a minimal React frontend with Redux, express backend, postgresql database interface, and OAuth authentication.
 
 Start the frontend with `npm run frontend`
 Start the backend with `npm run backend`
