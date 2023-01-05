@@ -1,3 +1,11 @@
+# TODO
+
+- add in console logging of actual sql commands
+  - consider refactorying pool into db.query
+- add in dotenv with prod, test, dev
+- Add in testing
+  - Talk about mocha vs jest for mongoose
+
 # Description
 
 This is a template project. It implements a minimal React frontend with Redux, express backend, postgresql database interface, and OAuth authentication.
