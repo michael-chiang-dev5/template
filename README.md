@@ -13,68 +13,37 @@ This is a template project. It implements a minimal React frontend with Redux, e
 Start the frontend with `npm run frontend`
 Start the backend with `npm run backend`
 
-# Notes on creation
+# Notes on design decisions
 
-The following section contains step-by-step instructions to re-create this repository from scratch.
+## .env and secrets.js
 
----
+You can store environment variables in either `.env` or `secrets.js`. Each method comes with advantages and disadvantages:
 
-## Install npm dependencies
+The advantage of .env is:
 
-Initialize package.json with the following command:
+- You can specify .env variables when running bash scripts. This because important during testing, when we want to switch from `MODE=dev` to `MODE=test` on the fly without editing secrets.js
 
-```
-$ npm init -y
-```
+The advantage of `secrets.js` is:
 
-Install the following dependencies with `$ npm install <DEV_DEPENDENCIES> --save-dev`
+- You can do logic such as concatenating a password to a URI.
+- You can declar non-string variables (bools, functions, etc.)
 
-- nodemon
-- react
-- react-dom
+When using .env, to access `process.env` you will need the following:
+`require('dotenv').config();`
 
-Install the following devDependencies with `$ npm install <DEV_DEPENDENCIES> --save-dev`. Note that devDependencies differ from regular dependencies in that they are only loaded in the dev build.
+## Babel
 
-- @babel/core
-- @babel/node
-- @babel/preset-env
-- @babel/preset-react
-- babel-loader
-- webpack
-- webpack-dev-server
-- webpack-cli
+For more information on babel setup: https://www.robinwieruch.de/minimal-node-js-babel-setup/
 
----
+Babel is required to enable uncoming javascript features in node (such as import), as well as browser transpilation (typescript, etc.)
 
-## Configure npm dependencies
+Babel configuration is done within ".babelrc" instead of package.json because this is considered best practice (reasons below):
 
-### Babel
-
-https://www.robinwieruch.de/minimal-node-js-babel-setup/
-
-Create file ".babelrc" with contents
-
-```
-{ 
-  "presets": [ 
-    "@babel/preset-env" 
-  ] 
-} 
-```
-
-babel/preset-env enables upcoming javascript features as babel presets (things like "import" in node). Consider disabiling this if you want to write kosher node.
-
-## Create repo structure
-
-There are many different ways to structure your repo. Here is one possible organizational structure:
-
-Create index.js, index.html in client folder
-
-Create server.js in your server folder
-
----
+- .babelrc is specific to babel and reduces clutter in package.json. Imagine doing webpack, ESLint, Babel configuration all within package.json and how difficult it would be to read.
+- .babel is more modular and makes it easier to share Babel configurations
 
 ## Webpack
 
-Read the tutorial here:
-https://www.robinwieruch.de/webpack-setup-tutorial/
+For more information on webpack setup: https://www.robinwieruch.de/webpack-setup-tutorial/
+
+I decided on webpack over vite. Why?
