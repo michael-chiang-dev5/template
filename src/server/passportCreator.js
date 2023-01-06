@@ -11,18 +11,22 @@ const passportCreator = function (db) {
   // google API on behalf of the user but at the moment I cannot thnk
   // of a use case
   const cb = async (request, accessToken, refreshToken, profile, done) => {
+    console.log('getting user');
     const userInfo = await db.getUser(profile.sub);
     // check if user is found
     if (userInfo) {
       // the first  argument of done is err. You must set err to null or else
       // user will not be authenticated
       return done(null, userInfo);
-    } else {
+    } else if (userInfo === null) {
       // user not found so add user to db
       // profile._json contains the following fields:
       //   sub, picture, email, email_verified
       const _id = await db.createUser(profile._json);
       return done(null, { ...profile._json, _id });
+    } else if (userInfo === undefined) {
+      // this means there was an error with db.getUser. TODO: test for error object
+      return done(null, { ...profile._json, _id: null });
     }
   };
 

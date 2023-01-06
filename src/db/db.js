@@ -1,14 +1,14 @@
-const pool = require('./pool.js');
+const pg = require('./pgPool.js');
 
-const obj = {};
+const db = {};
 
-obj.getCards = async () => {
+db.getCards = async () => {
   const sql = 'SELECT * FROM cards';
-  const data = await pool.query(sql);
+  const data = await pg.query(sql);
   return data.rows;
 };
 
-obj.createUser = async (args) => {
+db.createUser = async (args) => {
   try {
     const arr = [
       args['sub'],
@@ -20,7 +20,7 @@ obj.createUser = async (args) => {
     (sub, picture, email, email_verified)
     VALUES ($1, $2, $3, $4)
     RETURNING *;`;
-    const data = await pool.query(sql, arr);
+    const data = await pg.query(sql, arr);
     console.log(data.rows);
     return data.rows[0]._id;
   } catch (err) {
@@ -28,23 +28,23 @@ obj.createUser = async (args) => {
   }
 };
 
-obj.getUser = async (sub) => {
+db.getUser = async (sub) => {
   try {
     const sql = `SELECT * 
     FROM Users
     WHERE Users.sub=$1`;
-    const data = await pool.query(sql, [sub]);
+    const data = await pg.query(sql, [sub]);
     if (data.rows.length === 0) {
       return null;
     } else if (data.rows.length === 1) {
       return data.rows[0];
     } else {
-      console.warn('more than one user found');
-      throw '';
+      throw `db.getUser: more than one user found with sub ${sub} (found ${data.rows.length})`;
     }
-  } catch {
-    console.log('crash in db.getUser');
+  } catch (err) {
+    console.log(err);
+    return undefined;
   }
 };
 
-module.exports = obj;
+module.exports = { db };

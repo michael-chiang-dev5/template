@@ -20,6 +20,8 @@ Start the backend with `npm run backend`
 
 Note that app, passport are created dynamically with creator functions rather than the usual way of directly instantiating an express app / passport. The reason for this is increased modularity; dynamic creation of app gives us the ability to plug in different databases.
 
+Note that most express tutorials create a single server.js file that creates the server. I create the server dynamically using appCreator and set the listener, database in server.js. This has the advantage of increased modularity; you can initialize servers with different database which is useful for testing.
+
 ## Supertest
 
 There are two possible strategies to test the backend.
