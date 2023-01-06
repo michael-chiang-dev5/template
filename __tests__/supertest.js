@@ -1,4 +1,3 @@
-const { expectedError } = require('@babel/core/lib/errors/rewrite-stack-trace');
 const request = require('supertest');
 
 describe('Route integration', () => {

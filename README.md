@@ -15,6 +15,14 @@ Start the backend with `npm run backend`
 
 # Notes on design decisions
 
+## Testing
+
+The extend-expect module is a part of @testing-library/jest-dom that extends the expect global with the custom matchers provided by the library. This makes it easier to use the matchers in your tests, as you don't have to import them separately.
+
+## mocking static assets
+
+https://stephencharlesweiss.com/jest-handling-static-assets-mocks
+
 ## .env and secrets.js
 
 You can store environment variables in either `.env` or `secrets.js`. Each method comes with advantages and disadvantages:
