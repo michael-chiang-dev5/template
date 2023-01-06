@@ -14,6 +14,7 @@ const appCreator = function (db) {
   // Hacky way to store database interface on app for later use in
   // api and auth router. There probably is a cleaner way to do this.
   // TODO: find this way
+  // Also, I don't think I ever use app.db and just pass through creators. Maybe remove?
   app.db = db;
 
   // You don't need to use passportCreator since passport.authenticate
@@ -51,7 +52,7 @@ const appCreator = function (db) {
 
   // redirect to frontend. In production, we should serve frontend files
   app.get('/', (req, res) => {
-    return res.status(200).redirect('http://localhost:3000/');
+    return res.redirect('http://localhost:3000/'); // redirect automatically sets status to 302
   });
 
   // routers
