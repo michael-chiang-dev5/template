@@ -25,7 +25,13 @@ const pgQuery = (text, params, callback) => {
 db object creates sql commands and sends them to database, then
 returns output to backend
 */
-const db = {};
+const db = { pool }; // pool can be used to forcibly disconnect
+
+db.getTables = async () => {
+  const sql = 'SELECT * FROM information_schema.tables;';
+  const data = await pgQuery(sql);
+  return data.rows;
+};
 
 db.getCards = async () => {
   const sql = 'SELECT * FROM cards';
