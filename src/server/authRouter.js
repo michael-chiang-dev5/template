@@ -3,10 +3,22 @@ const express = require('express');
 const router = express.Router();
 require('./auth.js');
 const { passport } = require('./auth.js');
+const { DEBUG } = require('../../secrets.js');
 
 router.get('/user', (req, res) => {
   // req.user is the parsed jwt containing user information
-  console.log('user info', req.user);
+  // It is inconvenient to debug when authentication is required
+  // since you have to repeatedly log in to test a feature. Setting
+  // DEBUG to true automatically logs you in with a dummy user
+  if (DEBUG) {
+    req.user = {
+      _id: 4,
+      sub: '114622580175644930120',
+      picture: 'https://lh3.googleusercontent.com/a/default-user=s96-c',
+      email: 'michael.chiang.dev5@gmail.com',
+      email_verified: true,
+    };
+  }
   res.status(200).json(req.user ? req.user : null);
 });
 
