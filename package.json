@@ -15,7 +15,11 @@
     "testEnvironment": "jest-environment-jsdom",
     "setupFilesAfterEnv": [
       "@testing-library/jest-dom/extend-expect"
-    ]
+    ],
+    "moduleNameMapper": {
+      "\\.(css|less)$": "<rootDir>/__mocks__/styleMock.js",
+      "\\.(jpg|jpeg|png|gif)$": "<rootDir>/__mocks__/fileMock.js"
+    }
   },
   "keywords": [],
   "author": "",
