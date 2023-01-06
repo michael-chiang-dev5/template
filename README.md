@@ -16,9 +16,18 @@ Start the backend with `npm run backend`
 
 # Notes on design decisions
 
-## Testing
+## Supertest
 
-The extend-expect module is a part of @testing-library/jest-dom that extends the expect global with the custom matchers provided by the library. This makes it easier to use the matchers in your tests, as you don't have to import them separately.
+There are two possible strategies to test the backend.
+
+1. Initialize and teardown the server prior to running tests, listening to port 8081. Run all tests on the same server instance.
+2. Initialize a different server for each test. These servers are passed directly to supertest's `request` and do not listen to any ports.
+
+I have implemented (2) because it allows for greater modularity of tests. If tests affect the state of the server, then testing order could affect test outcomes.
+
+# Miscellaneous
+
+- The extend-expect module is a part of @testing-library/jest-dom that extends `expect` with custom matchers automatically so you don't have to import them separately.
 
 ## mocking static assets
 
