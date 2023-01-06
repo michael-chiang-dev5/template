@@ -1,7 +1,6 @@
 const { GOOGLE_CLIENT_ID, GOOGLE_CLIENT_SECRET } = require('../../secrets.js');
-const db = require('../db/db.js');
 
-const passportCreator = function () {
+const passportCreator = function (db) {
   const passport = require('passport');
 
   // this function takes an OAuth profile and searches the database for

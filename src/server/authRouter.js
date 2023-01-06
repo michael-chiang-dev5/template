@@ -1,9 +1,8 @@
-const { createNextState } = require('@reduxjs/toolkit');
 const express = require('express');
-const router = express.Router();
 const { passportCreator } = require('./passportCreator.js');
 const { DEBUG } = require('../../secrets.js');
 
+const router = express.Router();
 const passport = passportCreator();
 
 router.get('/user', (req, res) => {

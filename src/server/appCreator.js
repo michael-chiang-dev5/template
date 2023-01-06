@@ -1,22 +1,26 @@
 const path = require('path');
 const express = require('express');
-const apiRouter = require('./apiRouter.js');
+const { apiRouterCreator } = require('./apiRouterCreator.js');
 const authRouter = require('./authRouter.js');
-const passport = require('passport');
+const { passportCreator } = require('./passportCreator.js');
 const cors = require('cors');
 
 const session = require('express-session'); // required for oauth session
 const { SESSION_SECRET } = require('../../secrets.js');
 
-const appCreator = function (database) {
+const appCreator = function (db) {
   const app = express();
 
   // Hacky way to store database interface on app for later use in
   // api and auth router. There probably is a cleaner way to do this.
   // TODO: find this way
-  app.db = database;
+  app.db = db;
 
-  // session middleware parses the oauth jwt
+  // You don't need to use passportCreator since passport.authenticate
+  // does not use any database functionality nor google oauth, but we do
+  // so just for consistency with the rest of the code.
+  const passport = passportCreator(db);
+  // session middleware parses the oauth jwt.
   app.use(
     session({
       secret: SESSION_SECRET,
@@ -51,7 +55,9 @@ const appCreator = function (database) {
   });
 
   // routers
-  app.use('/api', apiRouter);
+  app.use('/api', apiRouterCreator(db));
+  // TODO: consider refactoring authRouter into a creator function. We don't db currently in authRouter,
+  // but if we might in the future and it would increase code consistency
   app.use('/auth', authRouter);
 
   // page not fuound
