@@ -1,7 +1,7 @@
 const { createNextState } = require('@reduxjs/toolkit');
 const express = require('express');
 const router = express.Router();
-const { passportCreator } = require('./auth.js');
+const { passportCreator } = require('./passportCreator.js');
 const { DEBUG } = require('../../secrets.js');
 
 const passport = passportCreator();

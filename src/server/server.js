@@ -1,4 +1,4 @@
-const { appCreator } = require('./app.js');
+const { appCreator } = require('./appCreator.js');
 const PORT = 8080;
 
 // start server
