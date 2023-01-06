@@ -6,7 +6,7 @@ describe('Auth endpoints', () => {
   });
 });
 
-describe('Rosdf', () => {
+describe('/', () => {
   it('asdf', () => {
     return expect(1).toEqual(1);
   });

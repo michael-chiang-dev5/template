@@ -25,6 +25,14 @@ There are two possible strategies to test the backend.
 
 I have implemented (2) because it allows for greater modularity of tests. If tests affect the state of the server, then testing order could affect test outcomes.
 
+## Tests on the database
+
+Running unit tests on the database presents several challenges:
+
+1. Database tests should be performed on a disposable test database rather than a production (or even dev) database.
+
+2. Tests are run asynchronously, so different tests should run on different databases in order to prevent collisions.
+
 # Miscellaneous
 
 - The extend-expect module is a part of @testing-library/jest-dom that extends `expect` with custom matchers automatically so you don't have to import them separately.
