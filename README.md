@@ -1,10 +1,9 @@
 # TODO
 
-- add in console logging of actual sql commands
-  - consider refactorying pool into db.query
-- add in dotenv with prod, test, dev
+- add in dotenv with test, dev (prod later)
 - Add in testing
   - Talk about mocha vs jest for mongoose
+  - use mocks for db
 - proxy to 8080
 
 # Description
