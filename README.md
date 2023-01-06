@@ -5,6 +5,7 @@
 - add in dotenv with prod, test, dev
 - Add in testing
   - Talk about mocha vs jest for mongoose
+- proxy to 8080
 
 # Description
 

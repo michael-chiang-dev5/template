@@ -24,7 +24,7 @@ app.use(express.urlencoded());
 // To get around CORS we normally set response header Access-Control-Allow-Origin --> '*'
 // For example:
 //      app.use((req, res, next) => {
-//        res.header('Access-Control-Allow-Origin', 'http://localhost:5000/');
+//        res.header('Access-Control-Allow-Origin', 'http://localhost:3000/');
 //        res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE');
 //        res.header('Access-Control-Allow-Headers', 'Content-Type');
 //        next();
@@ -39,7 +39,7 @@ app.use(
 );
 
 app.get('/', (req, res) => {
-  return res.status(200).redirect('http://localhost:5000/');
+  return res.status(200).redirect('http://localhost:3000/');
 });
 
 // routers
