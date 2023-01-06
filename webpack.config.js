@@ -29,7 +29,7 @@ module.exports = {
     filename: 'bundle.js',
   },
   devServer: {
-    port: 5000,
+    port: 3000,
     static: path.resolve(__dirname, './dist'),
     historyApiFallback: true,
   },
