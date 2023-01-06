@@ -16,6 +16,10 @@ Start the backend with `npm run backend`
 
 # Notes on design decisions
 
+## Wrapping app in a creator function
+
+Note that app, passport are created dynamically with creator functions rather than the usual way of directly instantiating an express app / passport. The reason for this is increased modularity; dynamic creation of app gives us the ability to plug in different databases.
+
 ## Supertest
 
 There are two possible strategies to test the backend.

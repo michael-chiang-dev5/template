@@ -8,8 +8,13 @@ const cors = require('cors');
 const session = require('express-session'); // required for oauth session
 const { SESSION_SECRET } = require('../../secrets.js');
 
-const makeApp = function (database) {
+const appCreator = function (database) {
   const app = express();
+
+  // Hacky way to store database interface on app for later use in
+  // api and auth router. There probably is a cleaner way to do this.
+  // TODO: find this way
+  app.db = database;
 
   // session middleware parses the oauth jwt
   app.use(
@@ -67,4 +72,4 @@ const makeApp = function (database) {
   return app;
 };
 
-module.exports = { makeApp };
+module.exports = { appCreator };

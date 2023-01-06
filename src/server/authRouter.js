@@ -1,9 +1,10 @@
 const { createNextState } = require('@reduxjs/toolkit');
 const express = require('express');
 const router = express.Router();
-require('./auth.js');
-const { passport } = require('./auth.js');
+const { passportCreator } = require('./auth.js');
 const { DEBUG } = require('../../secrets.js');
+
+const passport = passportCreator();
 
 router.get('/user', (req, res) => {
   // req.user is the parsed jwt containing user information
