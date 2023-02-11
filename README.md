@@ -10,8 +10,9 @@
 
 This is a template project. It implements a minimal React frontend with Redux, express backend, postgresql database interface, and OAuth authentication.
 
-Start the frontend with `npm run frontend`
-Start the backend with `npm run backend`
+- Rename `SECRETS_EXAMPLE.js` to `secrets.js` and fill in information. Email michael.chiang.dev5@gmail.com if you have any questions.
+- Start the frontend with `npm run frontend`
+- Start the backend with `npm run backend`
 
 # Notes on design decisions
 
