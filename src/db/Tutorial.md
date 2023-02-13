@@ -1,5 +1,7 @@
 # Setting up SQL database
 
+## Setting up a database
+
 Create a free postgresql database at:
 https://www.elephantsql.com/
 
@@ -8,15 +10,11 @@ Grab the url of your new database so you can access it from the command line in 
 create a table
 Example SQL:
 
-# draw er diagram
-
-https://app.sqldbm.com/PostgreSQL/Edit/p243962/
-
 # Useful SQL commands
 
 ## See tables that you created
 
-SELECT \* FROM information_schema.tables WHERE table_schema='public' AND table_name!='pg_stat_statements'
+`SELECT * FROM information_schema.tables WHERE table_schema='public' AND table_name!='pg_stat_statements'`
 
 ## Delete a table
 
@@ -24,13 +22,16 @@ SELECT \* FROM information_schema.tables WHERE table_schema='public' AND table_n
 
 ## Create a table
 
+This will create a users table, which is necesssary to save information from Google Oauth
+
 ```
-CREATE TABLE Persons (
-    PersonID int,
-    LastName varchar(255),
-    FirstName varchar(255),
-    Address varchar(255),
-    City varchar(255)
+CREATE TABLE Users
+(
+_id SERIAL PRIMARY KEY,
+sub TEXT NOT NULL,
+picture TEXT NULL,
+email TEXT NOT NULL,
+email_verified BOOLEAN NULL
 );
 ```
 

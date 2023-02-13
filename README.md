@@ -1,11 +1,3 @@
-# TODO
-
-- add in dotenv with test, dev (prod later)
-- Add in testing
-  - Talk about mocha vs jest for mongoose
-  - use mocks for db
-- proxy to 8080
-
 # Description
 
 This is a template project. It implements a minimal React frontend with Redux, express backend, postgresql database interface, and OAuth authentication.
@@ -13,6 +5,7 @@ This is a template project. It implements a minimal React frontend with Redux, e
 - Rename `SECRETS_EXAMPLE.js` to `secrets.js` and fill in information. Email michael.chiang.dev5@gmail.com if you have any questions.
 - Start the frontend with `npm run frontend`
 - Start the backend with `npm run backend`
+- You will need to create a "Users" table to store authentication info. See `src/db/Tutorial.md` for instructions on how to set up the auth table.
 
 # Notes on design decisions
 
@@ -79,3 +72,11 @@ Babel configuration is done within ".babelrc" instead of package.json because th
 For more information on webpack setup: https://www.robinwieruch.de/webpack-setup-tutorial/
 
 I decided on webpack over vite. Why?
+
+# TODO
+
+- add in dotenv with test, dev (prod later)
+- Add in testing
+  - Talk about mocha vs jest for mongoose
+  - use mocks for db
+- proxy to 8080
