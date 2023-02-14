@@ -1,9 +1,11 @@
-import React from 'react';
-import { BrowserRouter, Routes, Route, Link } from 'react-router-dom';
+import { BrowserRouter, Link, Route, Routes } from 'react-router-dom';
+
+import Container2 from './Components/Diagram-michael/Container';
+import Diagram from './Components/Diagram/Diagram';
 import Home from './Components/Home/Home';
 import Navbar from './Components/Navbar/Navbar';
-import Diagram from './Components/Diagram/Diagram';
-import Container2 from './Components/Diagram-michael/Container';
+import Questions from './Components/Questions/Questions';
+import React from 'react';
 
 const App = () => {
   return (
@@ -14,6 +16,7 @@ const App = () => {
           leftItems={{
             home: '/',
             diagram: '/diagram',
+            questions: '/questions',
             diagramMichael: '/diagramMichael',
           }}
         />
@@ -21,6 +24,7 @@ const App = () => {
           <Routes>
             <Route exact path="/" element={<Home />} />
             <Route exact path="/diagram" element={<Diagram />} />
+            <Route exact path="/questions" element={<Questions />} />
             <Route exact path="/diagramMichael" element={<Container2 />} />
           </Routes>
         </div>
