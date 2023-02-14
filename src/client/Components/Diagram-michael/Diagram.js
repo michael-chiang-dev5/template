@@ -8,13 +8,13 @@ import ReactFlow, {
   useEdgesState,
 } from 'reactflow';
 
-import CustomNode from './CustomNode';
+import NodeClient from './NodeClient';
 
 import 'reactflow/dist/style.css';
 import './overview.module.css';
 
 const nodeTypes = {
-  custom: CustomNode,
+  custom: NodeClient,
 };
 
 const minimapStyle = {

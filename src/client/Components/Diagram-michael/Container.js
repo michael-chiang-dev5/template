@@ -21,6 +21,7 @@ const Container = () => {
   const addNode = () => {
     const newNode = {
       id: uuid(),
+      type: 'custom',
       data: {
         label: 'new node',
       },
