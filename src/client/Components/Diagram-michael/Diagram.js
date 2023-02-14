@@ -1,4 +1,5 @@
-import React, { useCallback } from 'react';
+import React, { useCallback, useRef } from 'react';
+
 import ReactFlow, {
   addEdge,
   MiniMap,
@@ -32,6 +33,8 @@ const OverviewFlow = ({
   setEdges,
   onEdgesChange,
 }) => {
+  const edgeUpdateSuccessful = useRef(true);
+
   const onConnect = useCallback(
     (params) => setEdges((eds) => addEdge(params, eds)),
     []
@@ -49,22 +52,39 @@ const OverviewFlow = ({
     return edge;
   });
 
+  const onEdgeUpdateStart = useCallback(() => {
+    edgeUpdateSuccessful.current = false;
+  }, []);
+
+  const onEdgeUpdate = useCallback((oldEdge, newConnection) => {
+    edgeUpdateSuccessful.current = true;
+    setEdges((els) => updateEdge(oldEdge, newConnection, els));
+  }, []);
+
+  const onEdgeUpdateEnd = useCallback((_, edge) => {
+    if (!edgeUpdateSuccessful.current) {
+      setEdges((eds) => eds.filter((e) => e.id !== edge.id));
+    }
+
+    edgeUpdateSuccessful.current = true;
+  }, []);
+
   return (
-    <div style={{ height: 800 }}>
+    <div style={{ width: '600px', height: '500px' }}>
       <ReactFlow
         nodes={nodes}
-        edges={edgesWithUpdatedTypes}
+        edges={edges}
         onNodesChange={onNodesChange}
         onEdgesChange={onEdgesChange}
+        snapToGrid
+        onEdgeUpdate={onEdgeUpdate}
+        onEdgeUpdateStart={onEdgeUpdateStart}
+        onEdgeUpdateEnd={onEdgeUpdateEnd}
         onConnect={onConnect}
-        onInit={onInit}
         fitView
         attributionPosition="top-right"
-        nodeTypes={nodeTypes}
       >
-        <MiniMap style={minimapStyle} zoomable pannable />
         <Controls />
-        <Background color="#aaa" gap={16} />
       </ReactFlow>
     </div>
   );
