@@ -3,7 +3,7 @@ import { BrowserRouter, Routes, Route, Link } from 'react-router-dom';
 import Home from './Components/Home/Home';
 import Navbar from './Components/Navbar/Navbar';
 import Diagram from './Components/Diagram/Diagram';
-import DiagramMichael from './Components/Diagram-michael/Diagram';
+import Container2 from './Components/Diagram-michael/Container';
 
 const App = () => {
   return (
@@ -21,7 +21,7 @@ const App = () => {
           <Routes>
             <Route exact path="/" element={<Home />} />
             <Route exact path="/diagram" element={<Diagram />} />
-            <Route exact path="/diagramMichael" element={<DiagramMichael />} />
+            <Route exact path="/diagramMichael" element={<Container2 />} />
           </Routes>
         </div>
       </BrowserRouter>

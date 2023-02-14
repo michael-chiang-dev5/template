@@ -8,10 +8,7 @@ import ReactFlow, {
   useEdgesState,
 } from 'reactflow';
 
-import {
-  nodes as initialNodes,
-  edges as initialEdges,
-} from './initial-elements';
+import { edges as initialEdges } from './initial-elements';
 import CustomNode from './CustomNode';
 
 import 'reactflow/dist/style.css';
@@ -28,8 +25,7 @@ const minimapStyle = {
 const onInit = (reactFlowInstance) =>
   console.log('flow loaded:', reactFlowInstance);
 
-const OverviewFlow = () => {
-  const [nodes, setNodes, onNodesChange] = useNodesState(initialNodes);
+const OverviewFlow = ({ nodes, setNodes, onNodesChange }) => {
   const [edges, setEdges, onEdgesChange] = useEdgesState(initialEdges);
   const onConnect = useCallback(
     (params) => setEdges((eds) => addEdge(params, eds)),
