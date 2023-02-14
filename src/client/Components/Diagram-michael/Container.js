@@ -9,30 +9,23 @@ import ReactFlow, {
   useEdgesState,
 } from 'reactflow';
 import { v4 as uuid } from 'uuid';
+import { MarkerType, Position } from 'reactflow';
 
 const Container = () => {
-  const initialNodes = [
-    {
-      id: uuid(),
-      type: 'input',
-      data: {
-        label: 'asdfsdf Node',
-      },
-      position: { x: 250, y: 0 },
-    },
-  ];
+  const initialNodes = [];
+  const initialEdges = [];
 
   const [nodes, setNodes, onNodesChange] = useNodesState(initialNodes);
-
-  const edges = [];
+  const [edges, setEdges, onEdgesChange] = useEdgesState(initialEdges);
 
   const addNode = () => {
     const newNode = {
       id: uuid(),
-      type: 'input',
       data: {
         label: 'new node',
       },
+      sourcePosition: Position.Right,
+      targetPosition: Position.Left,
       position: { x: 250, y: 0 },
     };
     setNodes([...nodes, newNode]);
@@ -46,6 +39,9 @@ const Container = () => {
         nodes={nodes}
         setNotes={setNodes}
         onNodesChange={onNodesChange}
+        edges={edges}
+        setEdges={setEdges}
+        onEdgesChange={onEdgesChange}
       />
     </>
   );
