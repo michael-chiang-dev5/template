@@ -33,8 +33,8 @@ db.getTables = async () => {
   return data.rows;
 };
 
-db.getCards = async () => {
-  const sql = 'SELECT * FROM cards';
+db.getQuestions = async () => {
+  const sql = 'SELECT * FROM multiplechoice';
   const data = await pgQuery(sql);
   return data.rows;
 };
