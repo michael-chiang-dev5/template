@@ -8,11 +8,12 @@ import ReactFlow, {
   useNodesState,
   useEdgesState,
 } from 'reactflow';
+import { v4 as uuid } from 'uuid';
 
 const Container = () => {
   const initialNodes = [
     {
-      id: '1',
+      id: uuid(),
       type: 'input',
       data: {
         label: 'asdfsdf Node',
@@ -27,7 +28,7 @@ const Container = () => {
 
   const addNode = () => {
     const newNode = {
-      id: '2',
+      id: uuid(),
       type: 'input',
       data: {
         label: 'new node',
