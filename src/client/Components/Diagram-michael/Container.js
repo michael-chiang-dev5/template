@@ -18,24 +18,39 @@ const Container = () => {
   const [nodes, setNodes, onNodesChange] = useNodesState(initialNodes);
   const [edges, setEdges, onEdgesChange] = useEdgesState(initialEdges);
 
-  const addNode = () => {
+  const addNode = (str) => {
     const newNode = {
       id: uuid(),
-      type: 'custom',
       data: {
-        label: 'new node',
+        label: str,
       },
+      position: { x: 0, y: 0 },
       sourcePosition: Position.Right,
       targetPosition: Position.Left,
-      position: { x: 250, y: 0 },
     };
+
     setNodes([...nodes, newNode]);
+  };
+  const clearNodes = () => {
+    setNodes([]);
+  };
+  const debug = () => {
+    console.log(nodes);
+    console.log(edges);
   };
 
   return (
     <>
-      My diagram
-      <button onClick={addNode}>add node</button>
+      <div>
+        <button onClick={() => addNode('client')}>add client</button>
+        <button onClick={() => addNode('frontend')}>add frontend</button>
+        <button onClick={() => addNode('backend')}>add backend</button>
+        <button onClick={() => addNode('database')}>add database</button>
+        <button onClick={() => addNode('cache')}>add cache</button>
+
+        <button onClick={clearNodes}>clear nodes</button>
+        <button onClick={debug}>debug</button>
+      </div>
       <Diagram
         nodes={nodes}
         setNotes={setNodes}
