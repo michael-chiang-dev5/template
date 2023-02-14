@@ -2,6 +2,7 @@ import React from 'react';
 import { BrowserRouter, Routes, Route, Link } from 'react-router-dom';
 import Home from './Components/Home/Home';
 import Navbar from './Components/Navbar/Navbar';
+import Diagram from './Components/Diagram/Diagram';
 
 const App = () => {
   return (
@@ -11,12 +12,13 @@ const App = () => {
         <Navbar
           leftItems={{
             home: '/',
-            home2: '/',
+            diagram: '/diagram',
           }}
         />
         <div>
           <Routes>
             <Route exact path="/" element={<Home />} />
+            <Route exact path="/diagram" element={<Diagram />} />
           </Routes>
         </div>
       </BrowserRouter>
