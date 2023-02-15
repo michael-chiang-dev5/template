@@ -1,6 +1,7 @@
 const path = require('path');
 const express = require('express');
 const { apiRouterCreator } = require('./apiRouterCreator.js');
+const questionRouter = require('./questionRouter');
 const authRouter = require('./authRouter.js');
 const { passportCreator } = require('./passportCreator.js');
 const cors = require('cors');
@@ -56,7 +57,7 @@ const appCreator = function (db) {
   });
 
   // routers
-  app.use('/api', apiRouterCreator(db));
+  app.use('/api', questionRouter);
   // TODO: consider refactoring authRouter into a creator function. We don't db currently in authRouter,
   // but if we might in the future and it would increase code consistency
   app.use('/auth', authRouter);
