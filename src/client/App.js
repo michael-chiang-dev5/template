@@ -17,7 +17,7 @@ const App = () => {
             home: '/',
             diagram: '/diagram',
             questions: '/questions',
-            diagramMichael: '/diagramMichael',
+            diagramQuestions: '/diagramQuestions',
           }}
         />
         <div>
@@ -25,7 +25,11 @@ const App = () => {
             <Route exact path="/" element={<Home />} />
             <Route exact path="/diagram" element={<Diagram />} />
             <Route exact path="/questions" element={<Questions />} />
-            <Route exact path="/diagramMichael" element={<Container2 />} />
+            <Route
+              exact
+              path="/diagramQuestions/:id"
+              element={<Container2 />}
+            />
           </Routes>
         </div>
       </BrowserRouter>

@@ -10,8 +10,29 @@ import ReactFlow, {
 } from 'reactflow';
 import { v4 as uuid } from 'uuid';
 import { MarkerType, Position } from 'reactflow';
+import { useParams } from 'react-router-dom';
+import { useContext } from 'react';
+import axios from 'axios';
+import { useEffect } from 'react';
 
 const Container = () => {
+  const { id } = useParams();
+  // On first render, get question data
+  useEffect(() => {
+    // we cannot use async/await in useEffect without wrapping in outer function
+    const response = axios({
+      method: 'get',
+      withCredentials: true,
+      url: `http://localhost:8080/diagramQuestions/${id}`,
+    })
+      .then((res) => {
+        console.log(res.data);
+      })
+      .catch((err) => {
+        console.log('error with fetch');
+      });
+  }, []);
+
   const initialNodes = [];
   const initialEdges = [];
 
