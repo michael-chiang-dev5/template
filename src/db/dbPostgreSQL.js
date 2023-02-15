@@ -40,6 +40,25 @@ db.getQuestions = async () => {
   return data.rows;
 };
 
+db.getDiagramQuestion = async (id) => {
+  const sql = 'SELECT * FROM diagramquestions WHERE _id=$1';
+  const data = await pgQuery(sql, [id]);
+  const rows = data.rows;
+  if (rows.length !== 1) throw 'problem fetching from db';
+  return data.rows[0];
+};
+
+db.patchDiagramQuestion = async (args) => {
+  const arr = [args['state'], args['_id']];
+  const sql = `UPDATE diagramquestions
+  SET state=$1
+  WHERE _id=$2
+  RETURNING *;`;
+  const data = await pool.query(sql, arr);
+  console.log(data.rows[0]);
+  return data.rows[0];
+};
+
 db.createUser = async (args) => {
   try {
     const arr = [

@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const db = require('../db/dbPostgresql');
+const db = require('../db/dbPostgreSQL');
 
 router.get('/questions', (req, res, next) => {
   db.getQuestions()

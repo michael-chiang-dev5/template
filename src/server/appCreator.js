@@ -62,6 +62,33 @@ const appCreator = function (db) {
   // but if we might in the future and it would increase code consistency
   app.use('/auth', authRouter);
 
+  app.get('/diagramQuestions/:id', async (req, res, next) => {
+    try {
+      const id = req.params.id;
+      const row = await db.getDiagramQuestion(id);
+      res.status(200).json(row);
+    } catch (err) {
+      next({
+        log: 'error getting questions',
+        status: 500,
+        message: { err: err },
+      });
+    }
+  });
+  app.patch('/diagramQuestions/:id', async (req, res, next) => {
+    try {
+      const data = req.body;
+      const row = await db.patchDiagramQuestion(data);
+      res.status(200).json({});
+    } catch (err) {
+      next({
+        log: 'error getting questions',
+        status: 500,
+        message: { err: err },
+      });
+    }
+  });
+
   // page not fuound
   app.use('*', (req, res) => {
     return res.status(404).send('404 not found');
@@ -74,7 +101,7 @@ const appCreator = function (db) {
       status: 500,
       location: 'unknown location',
     };
-    return res.status(errObj.status).json(Object.assign(errTemplate, err));
+    return res.status(500).json(Object.assign(errTemplate, err));
   });
 
   return app;
