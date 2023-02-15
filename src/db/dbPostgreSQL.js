@@ -34,8 +34,9 @@ db.getTables = async () => {
 };
 
 db.getQuestions = async () => {
-  const sql = 'SELECT * FROM multiplechoice';
+  const sql = 'SELECT * FROM MultipleChoice';
   const data = await pgQuery(sql);
+  // console.log(data);
   return data.rows;
 };
 
