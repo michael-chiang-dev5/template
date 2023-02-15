@@ -40,6 +40,14 @@ db.getQuestions = async () => {
   return data.rows;
 };
 
+db.getDiagramQuestion = async (id) => {
+  const sql = 'SELECT * FROM diagramquestions WHERE _id=$1';
+  const data = await pgQuery(sql, [id]);
+  const rows = data.rows;
+  if (rows.length !== 1) throw 'problem fetching from db';
+  return data.rows[0];
+};
+
 db.createUser = async (args) => {
   try {
     const arr = [

@@ -64,7 +64,8 @@ const appCreator = function (db) {
 
   app.get('/diagramQuestions/:id', async (req, res, next) => {
     try {
-      const row = await db.getQuestions();
+      const id = req.params.id;
+      const row = await db.getDiagramQuestion(id);
       console.log('diagramQuestions: row:', row);
       res.status(200).json(row);
     } catch (err) {
@@ -88,7 +89,7 @@ const appCreator = function (db) {
       status: 500,
       location: 'unknown location',
     };
-    return res.status(errObj.status).json(Object.assign(errTemplate, err));
+    return res.status(500).json(Object.assign(errTemplate, err));
   });
 
   return app;
