@@ -1,24 +1,20 @@
-import React, { useCallback } from 'react';
-import ReactFlow, {
-  addEdge,
-  MiniMap,
-  Controls,
-  Background,
-  useNodesState,
-  useEdgesState,
-} from 'reactflow';
-
-import {
-  nodes as initialNodes,
-  edges as initialEdges,
-} from './initial-elements';
-import CustomNode from './CustomNode';
-
 import 'reactflow/dist/style.css';
 import './overview.module.css';
 
+import React, { useCallback } from 'react';
+import ReactFlow, {
+  Background,
+  Controls,
+  MiniMap,
+  addEdge,
+  useEdgesState,
+  useNodesState,
+} from 'reactflow';
+
+import NodeClient from './NodeClient';
+
 const nodeTypes = {
-  custom: CustomNode,
+  custom: NodeClient,
 };
 
 const minimapStyle = {
@@ -28,9 +24,14 @@ const minimapStyle = {
 const onInit = (reactFlowInstance) =>
   console.log('flow loaded:', reactFlowInstance);
 
-const OverviewFlow = () => {
-  const [nodes, setNodes, onNodesChange] = useNodesState(initialNodes);
-  const [edges, setEdges, onEdgesChange] = useEdgesState(initialEdges);
+const OverviewFlow = ({
+  nodes,
+  setNodes,
+  onNodesChange,
+  edges,
+  setEdges,
+  onEdgesChange,
+}) => {
   const onConnect = useCallback(
     (params) => setEdges((eds) => addEdge(params, eds)),
     []
@@ -49,7 +50,7 @@ const OverviewFlow = () => {
   });
 
   return (
-    <div style={{ height: 800 }}>
+    <div style={{ height: 800, backgroundColor: '#fff' }}>
       <ReactFlow
         nodes={nodes}
         edges={edgesWithUpdatedTypes}
