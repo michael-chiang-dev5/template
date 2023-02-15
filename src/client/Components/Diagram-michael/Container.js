@@ -61,7 +61,23 @@ const Container = () => {
     console.log(nodes);
     console.log(edges);
   };
-  const save = () => {};
+  const save = () => {
+    const savedObj = { nodes: nodes, edges: edges };
+    const savedStr = JSON.stringify(savedObj);
+    console.log(savedStr);
+    axios({
+      method: 'patch',
+      withCredentials: true,
+      data: { state: savedStr, _id: id },
+      url: `http://localhost:8080/diagramQuestions/${id}`,
+    })
+      .then((res) => {
+        console.log('successfully saved');
+      })
+      .catch((err) => {
+        console.log('problem saving');
+      });
+  };
 
   return (
     <>
@@ -76,6 +92,7 @@ const Container = () => {
 
         <button onClick={clearNodes}>clear nodes</button>
         <button onClick={debug}>debug</button>
+        <button onClick={save}>save</button>
       </div>
       <Diagram
         nodes={nodes}

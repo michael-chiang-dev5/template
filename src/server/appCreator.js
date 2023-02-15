@@ -66,8 +66,20 @@ const appCreator = function (db) {
     try {
       const id = req.params.id;
       const row = await db.getDiagramQuestion(id);
-      console.log('diagramQuestions: row:', row);
       res.status(200).json(row);
+    } catch (err) {
+      next({
+        log: 'error getting questions',
+        status: 500,
+        message: { err: err },
+      });
+    }
+  });
+  app.patch('/diagramQuestions/:id', async (req, res, next) => {
+    try {
+      const data = req.body;
+      const row = await db.patchDiagramQuestion(data);
+      res.status(200).json({});
     } catch (err) {
       next({
         log: 'error getting questions',

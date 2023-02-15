@@ -48,6 +48,17 @@ db.getDiagramQuestion = async (id) => {
   return data.rows[0];
 };
 
+db.patchDiagramQuestion = async (args) => {
+  const arr = [args['state'], args['_id']];
+  const sql = `UPDATE diagramquestions
+  SET state=$1
+  WHERE _id=$2
+  RETURNING *;`;
+  const data = await pool.query(sql, arr);
+  console.log(data.rows[0]);
+  return data.rows[0];
+};
+
 db.createUser = async (args) => {
   try {
     const arr = [
