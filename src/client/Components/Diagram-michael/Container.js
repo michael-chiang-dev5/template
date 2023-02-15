@@ -14,6 +14,7 @@ import { useParams } from 'react-router-dom';
 import { useContext } from 'react';
 import axios from 'axios';
 import { useEffect } from 'react';
+import { useState } from 'react';
 
 const Container = () => {
   const { id } = useParams();
@@ -26,18 +27,19 @@ const Container = () => {
       url: `http://localhost:8080/diagramQuestions/${id}`,
     })
       .then((res) => {
-        console.log(res.data);
+        setPrompt(res.data.prompt);
+        if (res.data.state) {
+          console.log('we should set state here');
+        }
       })
       .catch((err) => {
         console.log('error with fetch');
       });
   }, []);
 
-  const initialNodes = [];
-  const initialEdges = [];
-
-  const [nodes, setNodes, onNodesChange] = useNodesState(initialNodes);
-  const [edges, setEdges, onEdgesChange] = useEdgesState(initialEdges);
+  const [nodes, setNodes, onNodesChange] = useNodesState([]);
+  const [edges, setEdges, onEdgesChange] = useEdgesState([]);
+  const [prompt, setPrompt] = useState('');
 
   const addNode = (str) => {
     const newNode = {
@@ -59,9 +61,12 @@ const Container = () => {
     console.log(nodes);
     console.log(edges);
   };
+  const save = () => {};
 
   return (
     <>
+      <h1>{prompt}</h1>
+
       <div>
         <button onClick={() => addNode('client')}>add client</button>
         <button onClick={() => addNode('frontend')}>add frontend</button>

@@ -22,9 +22,7 @@ const minimapStyle = {
   height: 120,
 };
 
-const onInit = (reactFlowInstance) =>
-  console.log('flow loaded:', reactFlowInstance);
-
+const onInit = (reactFlowInstance) => {};
 const OverviewFlow = ({
   nodes,
   setNodes,
