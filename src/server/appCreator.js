@@ -62,6 +62,20 @@ const appCreator = function (db) {
   // but if we might in the future and it would increase code consistency
   app.use('/auth', authRouter);
 
+  app.get('/diagramQuestions/:id', async (req, res, next) => {
+    try {
+      const row = await db.getQuestions();
+      console.log('diagramQuestions: row:', row);
+      res.status(200).json(row);
+    } catch (err) {
+      next({
+        log: 'error getting questions',
+        status: 500,
+        message: { err: err },
+      });
+    }
+  });
+
   // page not fuound
   app.use('*', (req, res) => {
     return res.status(404).send('404 not found');

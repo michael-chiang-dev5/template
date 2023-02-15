@@ -25,13 +25,12 @@ SELECT \* FROM information_schema.tables WHERE table_schema='public' AND table_n
 ## Create a table
 
 ```
-CREATE TABLE Users
-(
-_id SERIAL PRIMARY KEY,
-sub TEXT NOT NULL,
-picture TEXT NULL,
-email TEXT NOT NULL,
-email_verified BOOLEAN NULL
+CREATE TABLE Persons (
+    PersonID int,
+    LastName varchar(255),
+    FirstName varchar(255),
+    Address varchar(255),
+    City varchar(255)
 );
 ```
 
