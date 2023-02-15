@@ -1,13 +1,16 @@
 import React, { useState } from 'react';
 
 import axios from 'axios';
+import styles from './home.module.css';
+
 const Home = () => {
   return (
-    <>
+    <div className={styles.home}>
+      <h1>Systems Design Practice</h1>
       <div>
-        <h1>Systems Design Practice</h1>
+        {/* <img src="./assets/systemsdesign.png" alt="systems design" /> */}
       </div>
-    </>
+    </div>
   );
 };
 
