@@ -25,16 +25,16 @@ const Container = () => {
       method: 'get',
       withCredentials: true,
       url: `http://localhost:8080/diagramQuestions/${id}`,
-    })
-      .then((res) => {
-        setPrompt(res.data.prompt);
-        if (res.data.state) {
-          console.log('we should set state here');
-        }
-      })
-      .catch((err) => {
-        console.log('error with fetch');
-      });
+    }).then((res) => {
+      setPrompt(res.data.prompt);
+      if (res.data.state) {
+        const state = JSON.parse(res.data.state);
+        const initialNodes = state.nodes;
+        const initialEdges = state.edges;
+        setNodes(initialNodes);
+        setEdges(initialEdges);
+      }
+    });
   }, []);
 
   const [nodes, setNodes, onNodesChange] = useNodesState([]);
@@ -58,25 +58,18 @@ const Container = () => {
     setNodes([]);
   };
   const debug = () => {
-    console.log(nodes);
-    console.log(edges);
+    // console.log(nodes);
+    // console.log(edges);
   };
   const save = () => {
     const savedObj = { nodes: nodes, edges: edges };
     const savedStr = JSON.stringify(savedObj);
-    console.log(savedStr);
     axios({
       method: 'patch',
       withCredentials: true,
       data: { state: savedStr, _id: id },
       url: `http://localhost:8080/diagramQuestions/${id}`,
-    })
-      .then((res) => {
-        console.log('successfully saved');
-      })
-      .catch((err) => {
-        console.log('problem saving');
-      });
+    });
   };
 
   return (
