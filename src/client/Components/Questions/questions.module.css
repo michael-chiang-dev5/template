@@ -1,0 +1,35 @@
+
+.qcontainer {
+  margin: auto;
+}
+
+.mainh { 
+  font-size: 3rem;
+  text-align: center;
+}
+
+.cardcontainer {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+
+.cards {
+  color: #BDAACB;
+  background-color: #491570;
+  height: 250px;
+  width: 450px;
+  border-radius: 20px;
+  padding: 10px;
+  margin: 15px auto;
+}
+
+.cardh {
+  color: #fff;
+  text-align: center;
+  font-size: 1.75rem;
+}
+
+.cardp {
+  font-size: 1.2rem;
+}
