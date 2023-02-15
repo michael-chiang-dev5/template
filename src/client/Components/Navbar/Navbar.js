@@ -1,9 +1,10 @@
-import axios from 'axios';
 import React, { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+
 import { Link } from 'react-router-dom';
-import styles from './navbar.module.css';
-import { useSelector, useDispatch } from 'react-redux';
 import { actionSetField } from '../../Redux/slices/userSlice';
+import axios from 'axios';
+import styles from './navbar.module.css';
 import { v4 as uuid } from 'uuid';
 
 const Navbar = ({ leftItems }) => {
@@ -38,30 +39,40 @@ const Navbar = ({ leftItems }) => {
     });
   }, []);
   return (
-    <>
-      <div className={styles.row}>
-        <div className={`${styles.row}`}>
-          {Object.entries(leftItems).map((e) => {
-            const [title, url] = e;
-            return (
-              <div className={styles.margin} key={uuid()}>
-                <Link to={url}>{title}</Link>
-              </div>
-            );
-          })}
-        </div>
+    <div className={styles.row}>
+      <div className={`${styles.row}`}>
+        {Object.entries(leftItems).map((e) => {
+          const [title, url] = e;
+          return (
+            <div className={styles.margin} key={uuid()}>
+              <Link to={url} style={{ textDecoration: 'none', color: '#fff' }}>
+                {title}
+              </Link>
+            </div>
+          );
+        })}
+      </div>
 
-        <div className={styles.row}>
-          <div className={styles.margin}>
-            {email ? (
-              <a href="http://localhost:8080/auth/logout">logout {email}</a>
-            ) : (
-              <a href={`http://localhost:8080/auth/google`}>log in</a>
-            )}
-          </div>
+      <div className={styles.row}>
+        <div className={styles.margin}>
+          {email ? (
+            <a
+              className={styles.isLoggedIn}
+              href="http://localhost:8080/auth/logout"
+            >
+              logout {email}
+            </a>
+          ) : (
+            <a
+              className={styles.isLoggedIn}
+              href={`http://localhost:8080/auth/google`}
+            >
+              log in
+            </a>
+          )}
         </div>
       </div>
-    </>
+    </div>
   );
 };
 
