@@ -25,13 +25,15 @@ const appCreator = function (db) {
   app.use(
     session({
       secret: SESSION_SECRET,
+      resave: true,
+      saveUninitialized: true,
     })
   );
   app.use(passport.authenticate('session'));
 
   // required to parse post data
   app.use(express.json());
-  app.use(express.urlencoded());
+  app.use(express.urlencoded({ extended: true }));
 
   // To get around CORS we normally set response header Access-Control-Allow-Origin --> '*'
   // For example:
